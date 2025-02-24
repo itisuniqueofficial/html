@@ -1,0 +1,177 @@
+<style>:root {
+  --primary-gradient-start: #00ff00;
+  --primary-gradient-end: #00ffff;
+  --hover-gradient-start: #00cc00;
+  --hover-gradient-end: #00ccff;
+  --shadow-color: rgba(0, 0, 0, 0.3);
+  --text-color: #ffffff;
+  --resolution-color: #ff0000;
+}
+
+.download-section {
+  background-color: #1a1a1a;
+  padding: 30px;
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+  font-family: 'Arial', sans-serif;
+}
+
+.download-item {
+  margin: 20px 0;
+}
+
+.resolution {
+  color: var(--resolution-color);
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.download-button {
+  display: inline-block;
+  padding: 18px 40px;
+  background: linear-gradient(45deg, var(--primary-gradient-start), var(--primary-gradient-end));
+  color: var(--text-color);
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 5px 15px var(--shadow-color);
+  transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
+  width: 100%;
+  max-width: 300px;
+}
+
+.download-button .icon {
+  margin-right: 10px;
+  font-size: 20px;
+}
+
+.download-button .text {
+  vertical-align: middle;
+  text-transform: uppercase;
+}
+
+.download-button:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(45deg, var(--hover-gradient-start), var(--hover-gradient-end));
+  box-shadow: 0 8px 20px var(--shadow-color);
+}
+
+.download-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 10px var(--shadow-color);
+}
+
+/* Tooltip Styling */
+.download-button .tooltip {
+  visibility: hidden;
+  width: 200px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 10px;
+  border-radius: 6px;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -100px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.download-button:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Loading State (will be toggled via JavaScript) */
+.download-button.loading {
+  background: linear-gradient(45deg, #666, #888);
+  pointer-events: none;
+}
+
+.download-button.loading .text {
+  opacity: 0;
+}
+
+.download-button.loading::after {
+  content: attr(data-loading);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--text-color);
+  font-size: 16px;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  .download-button {
+    padding: 15px 20px;
+    font-size: 16px;
+    max-width: 250px;
+  }
+
+  .resolution {
+    font-size: 18px;
+  }
+}</style>
+
+<div class="download-section">
+  <div class="download-item">
+    <div class="resolution">1080p</div>
+    <a href="#" class="download-button" data-size="1.2GB" data-loading="Downloading...">
+      <span class="icon">⚡</span>
+      <span class="text">CLICK HERE TO DOWNLOAD</span>
+      <span class="tooltip">High-quality 1080p video (1.2GB)</span>
+    </a>
+  </div>
+
+  <div class="download-item">
+    <div class="resolution">720p</div>
+    <a href="#" class="download-button" data-size="700MB" data-loading="Downloading...">
+      <span class="icon">⚡</span>
+      <span class="text">CLICK HERE TO DOWNLOAD</span>
+      <span class="tooltip">Standard 720p video (700MB)</span>
+    </a>
+  </div>
+
+  <div class="download-item">
+    <div class="resolution">480p</div>
+    <a href="#" class="download-button" data-size="400MB" data-loading="Downloading...">
+      <span class="icon">⚡</span>
+      <span class="text">CLICK HERE TO DOWNLOAD</span>
+      <span class="tooltip">Light 480p video (400MB)</span>
+    </a>
+  </div>
+</div>
+
+<script>document.querySelectorAll('.download-button').forEach(button => {
+  button.addEventListener('click', function(e) {
+    e.preventDefault();
+    const size = this.getAttribute('data-size');
+    this.classList.add('loading');
+    
+    // Simulate a download (replace with actual download logic)
+    setTimeout(() => {
+      this.classList.remove('loading');
+      alert(`Download started for ${size} file!`);
+    }, 2000); // 2-second delay for demo
+  });
+});</script>
